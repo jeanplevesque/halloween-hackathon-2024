@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zombies.OpenGL", "Zombies.OpenGL.csproj", "{CE2AEFA9-2B47-4907-9FBF-5CDD7F01E1DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE2AEFA9-2B47-4907-9FBF-5CDD7F01E1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2AEFA9-2B47-4907-9FBF-5CDD7F01E1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2AEFA9-2B47-4907-9FBF-5CDD7F01E1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2AEFA9-2B47-4907-9FBF-5CDD7F01E1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4112A486-A3AC-4664-8AEE-FBE234719590}
+	EndGlobalSection
+EndGlobal

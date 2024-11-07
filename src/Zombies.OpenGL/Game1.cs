@@ -2,12 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Zombies.OpenGL
+namespace Zombies
 {
 	public class Game1 : Game
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
+		private Player _player;
 
 		public Game1()
 		{
@@ -16,26 +17,32 @@ namespace Zombies.OpenGL
 			IsMouseVisible = true;
 		}
 
+		public SpriteBatch SpriteBatch => _spriteBatch;
+
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			_spriteBatch = new SpriteBatch(GraphicsDevice);
+			SetupGame();
 
 			base.Initialize();
 		}
 
+		private void SetupGame()
+		{
+			var playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+			_player = new Player(this, playerPosition);
+
+			Components.Add(_player);
+		}
+
 		protected override void LoadContent()
 		{
-			_spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			// TODO: use this.Content to load your game content here
 		}
 
 		protected override void Update(GameTime gameTime)
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
-
-			// TODO: Add your update logic here
 
 			base.Update(gameTime);
 		}
@@ -44,9 +51,10 @@ namespace Zombies.OpenGL
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
 
+			_spriteBatch.Begin();
 			base.Draw(gameTime);
+			_spriteBatch.End();
 		}
 	}
 }

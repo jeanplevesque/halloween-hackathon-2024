@@ -1,3 +1,3 @@
 ﻿
-using var game = new Zombies.OpenGL.Game1();
+using var game = new Zombies.Game1();
 game.Run();

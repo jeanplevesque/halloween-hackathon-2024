@@ -58,7 +58,7 @@ namespace Zombies
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-			_spriteBatch.Begin();
+			_spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 			base.Draw(gameTime);
 			_spriteBatch.End();
 		}

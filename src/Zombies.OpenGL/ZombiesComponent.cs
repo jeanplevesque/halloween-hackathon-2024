@@ -68,20 +68,62 @@ public class ZombiesComponent : DrawableGameComponent
 
 	private void Spawn()
 	{
+		var kind = Random.Shared.Next(0, 10) switch // 10% chance to spawn a fast zombie.
+		{
+			< 3 => ZombieKind.Tank,
+			< 5 => ZombieKind.Fast,
+			_ => ZombieKind.Normal
+		};
+
 		var position = new Vector2(
 			Random.Shared.Next(SpawnPadding, Game.GraphicsDevice.Viewport.Width - SpawnPadding),
 			Random.Shared.Next(SpawnPadding, Game.GraphicsDevice.Viewport.Height - SpawnPadding)
 		);
 
+		var speed = kind switch
+		{
+			ZombieKind.Tank => 20,
+			ZombieKind.Fast => 75,
+			_ => 40
+		};
+
+		var health = kind switch
+		{
+			ZombieKind.Tank => 200,
+			ZombieKind.Fast => 30,
+			_ => 70
+		};
+
+		var damage = kind switch
+		{
+			ZombieKind.Tank => 20,
+			ZombieKind.Fast => 5,
+			_ => 10
+		};
+
+		var hitCooldown = kind switch
+		{
+			ZombieKind.Tank => 2,
+			ZombieKind.Fast => 0.3f,
+			_ => 1
+		};
+
+		var boundingRadius = kind switch
+		{
+			ZombieKind.Tank => 80,
+			ZombieKind.Fast => 30,
+			_ => 50
+		};
+
 		var zombie = new Zombie(
-			speed: 40,
+			speed: speed,
 			texture: Game.Content.Load<Texture2D>("zombie0"),
 			player: _player,
 			position: position,
-			remainingHealth: 100,
-			damage: 10,
-			hitCooldown: 1,
-			boundingRadius: 20
+			remainingHealth: health,
+			damage: damage,
+			hitCooldown: hitCooldown,
+			boundingRadius: boundingRadius
 		);
 
 		if (zombie.Intersects(_player))

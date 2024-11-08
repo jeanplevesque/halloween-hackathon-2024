@@ -10,8 +10,6 @@ namespace Zombies;
 
 public class Zombie
 {
-	const float TargetRadius = 60.0f;
-
 	private readonly float _speed;
 	private readonly Texture2D _texture;
 	private readonly Player _player;
@@ -41,7 +39,8 @@ public class Zombie
 		_player = player;
 		_position = position;
 		_remainingHealth = remainingHealth;
-		_textureScale = TargetRadius / (float)_texture.Width;
+		var targetRadius = boundingRadius * 2f;
+		_textureScale = targetRadius / (float)_texture.Width;
 		_hitCooldown = hitCooldown;
 		_boundingRadius = boundingRadius;
 	}

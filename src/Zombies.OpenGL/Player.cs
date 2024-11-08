@@ -12,7 +12,7 @@ namespace Zombies;
 public class Player : DrawableGameComponent
 {
 	// In pixels per second
-	const float Speed = 80.0f;
+	const float Speed = 100.0f;
 	const float TargetRadius = 60.0f;
 	public const float BoundingRadius = 30.0f;
 

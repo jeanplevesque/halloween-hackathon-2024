@@ -39,7 +39,7 @@ public class Zombie
 		_player = player;
 		_position = position;
 		_remainingHealth = remainingHealth;
-		var targetRadius = boundingRadius * 2f;
+		var targetRadius = boundingRadius * 4f;
 		_textureScale = targetRadius / (float)_texture.Width;
 		_hitCooldown = hitCooldown;
 		_boundingRadius = boundingRadius;

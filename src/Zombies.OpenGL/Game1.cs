@@ -55,7 +55,7 @@ namespace Zombies
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.SaddleBrown);
 
 
 			_spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);

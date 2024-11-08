@@ -123,7 +123,7 @@ public class ZombiesComponent : DrawableGameComponent
 			remainingHealth: health,
 			damage: damage,
 			hitCooldown: hitCooldown,
-			boundingRadius: boundingRadius
+			boundingRadius: boundingRadius / 2f
 		);
 
 		if (zombie.Intersects(_player))

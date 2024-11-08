@@ -85,6 +85,30 @@
 /processorParam:TextureFormat=Color
 /build:player.png
 
+#begin splush0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:splush0.wav
+
+#begin splush1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:splush1.wav
+
+#begin splush2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:splush2.wav
+
+#begin splush3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:splush3.wav
+
 #begin zombie0.png
 /importer:TextureImporter
 /processor:TextureProcessor

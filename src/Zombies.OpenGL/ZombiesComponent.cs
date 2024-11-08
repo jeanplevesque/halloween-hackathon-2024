@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ public class ZombiesComponent : DrawableGameComponent
 	private readonly BulletsComponent _bullets;
 	private readonly ParticlesComponent _particles;
 	private readonly List<Zombie> _zombies = new List<Zombie>();
+	private readonly List<SoundEffect> _splushSounds = new List<SoundEffect>();
 
 	private float _remainingTimeBeforeNextSpawn = SpawnCooldown;
 
@@ -25,6 +27,14 @@ public class ZombiesComponent : DrawableGameComponent
 		_player = player;
 		_bullets = bullets;
 		_particles = particles;
+	}
+
+	override protected void LoadContent()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			_splushSounds.Add(Game.Content.Load<SoundEffect>($"splush{i}"));
+		}
 	}
 
 	public override void Update(GameTime gameTime)
@@ -44,7 +54,10 @@ public class ZombiesComponent : DrawableGameComponent
 			{
 				if (bullet.Intersects(zombie))
 				{
-					zombie.TakeDamage(bullet.Damage);
+					if (zombie.TakeDamage(bullet.Damage))
+					{
+						PlaySplushSound();
+					}
 					bullet.Collide(zombie);
 					_particles.AddBloodSplash(bullet.Position, bullet.Direction, bullet.Velocity);
 				}
@@ -67,6 +80,14 @@ public class ZombiesComponent : DrawableGameComponent
 				_zombies.Remove(zombie);
 			}
 		}
+	}
+
+	private void PlaySplushSound()
+	{
+		var soundEffect = _splushSounds[Random.Shared.Next(0, _splushSounds.Count)];
+		var soundInstance = soundEffect.CreateInstance();
+		soundInstance.Volume = 0.8f;
+		soundInstance.Play();
 	}
 
 	private void Spawn()

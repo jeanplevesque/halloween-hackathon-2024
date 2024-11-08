@@ -72,13 +72,14 @@ public class Zombie
 			layerDepth: 0);
 	}
 
-	public void TakeDamage(object damage)
+	public bool TakeDamage(object damage)
 	{
 		_remainingHealth -= (float)damage;
 		if (_remainingHealth <= 0)
 		{
 			_isAlive = false;
 		}
+		return !_isAlive;
 	}
 
 	public bool CanHit()

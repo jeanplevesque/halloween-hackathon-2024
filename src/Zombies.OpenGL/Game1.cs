@@ -8,6 +8,7 @@ namespace Zombies
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
+		private BulletsComponent _bulletsComponent;
 		private Player _player;
 
 		public Game1()
@@ -30,8 +31,10 @@ namespace Zombies
 		private void SetupGame()
 		{
 			var playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
-			_player = new Player(this, playerPosition);
+			_bulletsComponent = new BulletsComponent(this);
+			_player = new Player(this, playerPosition, _bulletsComponent);
 
+			Components.Add(_bulletsComponent);
 			Components.Add(_player);
 		}
 

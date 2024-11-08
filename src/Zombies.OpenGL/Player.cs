@@ -16,15 +16,18 @@ public class Player : DrawableGameComponent
 	const float TargetRadius = 60.0f;
 
 	private Vector2 _position;
+	private readonly BulletsComponent _bullets;
 	private Texture2D _texture;
 	private SpriteBatch _spriteBatch;
 	private Vector2 _toPointer;
 	private float _angle;
 	private float _textureScale;
+	private float _remainingShootingCooldown;
 
-	public Player(Game game, Vector2 position) : base(game)
+	public Player(Game game, Vector2 position, BulletsComponent bullets) : base(game)
 	{
 		_position = position;
+		_bullets = bullets;
 	}
 
 	protected override void LoadContent()
@@ -36,6 +39,7 @@ public class Player : DrawableGameComponent
 
 	public override void Update(GameTime gameTime)
 	{
+		_remainingShootingCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 		HandleInput(gameTime);
 	}
 
@@ -60,7 +64,7 @@ public class Player : DrawableGameComponent
 		{
 			direction.X += 1;
 		}
-		
+
 		if (direction != Vector2.Zero)
 		{
 			direction.Normalize();
@@ -70,6 +74,12 @@ public class Player : DrawableGameComponent
 		var mouseState = Mouse.GetState();
 		_toPointer = new Vector2(mouseState.X, mouseState.Y) - _position;
 		_angle = (float)Math.Atan2(_toPointer.Y, _toPointer.X) + MathHelper.PiOver2;
+
+		if (mouseState.LeftButton == ButtonState.Pressed && _remainingShootingCooldown <= 0)
+		{
+			_bullets.AddBullet(_position, _toPointer);
+			_remainingShootingCooldown = 0.1f;
+		}
 	}
 
 	public override void Draw(GameTime gameTime)

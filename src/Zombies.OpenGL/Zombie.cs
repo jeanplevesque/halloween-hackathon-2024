@@ -39,6 +39,7 @@ public class Zombie
 		_player = player;
 		_position = position;
 		_remainingHealth = remainingHealth;
+		_damage = damage;
 		var targetRadius = boundingRadius * 4f;
 		_textureScale = targetRadius / (float)_texture.Width;
 		_hitCooldown = hitCooldown;
@@ -56,6 +57,7 @@ public class Zombie
 		direction.Normalize();
 		_position += direction * _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 		_angle = (float)Math.Atan2(direction.Y, direction.X) + MathHelper.PiOver2;
+		_remainingTimeBeforeCanHit -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 	}
 
 	public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -84,7 +86,7 @@ public class Zombie
 
 	public bool CanHit()
 	{
-		return _hitCooldown <= 0;
+		return _remainingTimeBeforeCanHit <= 0;
 	}
 
 	public void Hit()

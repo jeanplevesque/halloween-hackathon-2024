@@ -73,6 +73,20 @@
 /processorParam:TextureFormat=Color
 /build:blood4.png
 
+#begin Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font.spritefont
+
+#begin FontBig.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:FontBig.spritefont
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

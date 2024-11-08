@@ -19,6 +19,7 @@ public class ZombiesComponent : DrawableGameComponent
 	private readonly ParticlesComponent _particles;
 	private readonly List<Zombie> _zombies = new List<Zombie>();
 	private readonly List<SoundEffect> _splushSounds = new List<SoundEffect>();
+	private SpriteFont _font;
 
 	private float _remainingTimeBeforeNextSpawn = SpawnCooldown;
 
@@ -29,12 +30,15 @@ public class ZombiesComponent : DrawableGameComponent
 		_particles = particles;
 	}
 
+	public int Score { get; private set; }
+
 	override protected void LoadContent()
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			_splushSounds.Add(Game.Content.Load<SoundEffect>($"splush{i}"));
 		}
+		_font = Game.Content.Load<SpriteFont>("Font");
 	}
 
 	public override void Update(GameTime gameTime)
@@ -57,6 +61,7 @@ public class ZombiesComponent : DrawableGameComponent
 					if (zombie.TakeDamage(bullet.Damage))
 					{
 						PlaySplushSound();
+						++Score;
 					}
 					bullet.Collide(zombie);
 					_particles.AddBloodSplash(bullet.Position, bullet.Direction, bullet.Velocity);
@@ -162,9 +167,18 @@ public class ZombiesComponent : DrawableGameComponent
 
 	public override void Draw(GameTime gameTime)
 	{
+		var spriteBatch = ((Game1)Game).SpriteBatch;
 		foreach (var zombie in _zombies)
 		{
-			zombie.Draw(gameTime, ((Game1)Game).SpriteBatch);
+			zombie.Draw(gameTime, spriteBatch);
 		}
+		// 500f1b
+		var color = new Color(0x50, 0x0, 0x1b);
+		spriteBatch.DrawString(
+			_font,
+			$"Score: {Score}",
+			new Vector2(10, 10),
+			color
+		);
 	}
 }

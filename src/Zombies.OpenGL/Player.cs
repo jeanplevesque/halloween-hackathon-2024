@@ -26,6 +26,7 @@ public class Player : DrawableGameComponent
 	private float _remainingShootingCooldown;
 	private float _remainingHealth = 100;
 	private bool _isAlive = true;
+	private SpriteFont _font;
 
 	public Player(Game game, Vector2 position, BulletsComponent bullets) : base(game)
 	{
@@ -34,12 +35,14 @@ public class Player : DrawableGameComponent
 	}
 
 	public Vector2 Position => _position;
+	public bool IsAlive => _isAlive;
 
 	protected override void LoadContent()
 	{
 		_spriteBatch = ((Game1)Game).SpriteBatch;
 		_texture = Game.Content.Load<Texture2D>("player");
 		_textureScale = TargetRadius / (float)_texture.Width;
+		_font = Game.Content.Load<SpriteFont>("Font");
 	}
 
 	public override void Update(GameTime gameTime)
@@ -104,6 +107,12 @@ public class Player : DrawableGameComponent
 			origin: Vector2.One * 0.5f * _texture.Width,
 			effects: SpriteEffects.None,
 			layerDepth: 0);
+
+		_spriteBatch.DrawString(
+			spriteFont: _font,
+			text: $"Health: {_remainingHealth:0.0}",
+			position: new Vector2(10, GraphicsDevice.Viewport.Height - 60),
+			color: Color.White);
 	}
 
 	public void TakeDamage(float damage)

@@ -15,14 +15,16 @@ public class ZombiesComponent : DrawableGameComponent
 
 	private readonly Player _player;
 	private readonly BulletsComponent _bullets;
+	private readonly ParticlesComponent _particles;
 	private readonly List<Zombie> _zombies = new List<Zombie>();
 
 	private float _remainingTimeBeforeNextSpawn = SpawnCooldown;
 
-	public ZombiesComponent(Game game, Player player, BulletsComponent bullets) : base(game)
+	public ZombiesComponent(Game game, Player player, BulletsComponent bullets, ParticlesComponent particles) : base(game)
 	{
 		_player = player;
 		_bullets = bullets;
+		_particles = particles;
 	}
 
 	public override void Update(GameTime gameTime)
@@ -44,6 +46,7 @@ public class ZombiesComponent : DrawableGameComponent
 				{
 					zombie.TakeDamage(bullet.Damage);
 					bullet.Collide(zombie);
+					_particles.AddBloodSplash(bullet.Position, bullet.Direction, bullet.Velocity);
 				}
 			}
 

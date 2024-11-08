@@ -57,6 +57,10 @@ public class Bullet
 
 	public float Damage => _damage;
 
+	public Vector2 Position => _tipPosition;
+	public Vector2 Direction => _direction;
+	public float Velocity => _velocity;
+
 	public void Update(float deltaTime)
 	{
 		if (!IsAlive)

@@ -21,19 +21,21 @@ public class BulletsComponent : DrawableGameComponent
 
 	public Texture2D BulletTexture { get; private set; }
 	public Rectangle Bounds { get; private set; }
+	public IEnumerable<Bullet> Bullets => _bullets;
 
 	public void AddBullet(Vector2 position, Vector2 direction)
 	{
 		var bullet = new Bullet(
 			length: 20,
 			velocity: 400,
-			maxCollisionsCount: 1,
+			remainingCollisionsCount: 1,
 			texture: BulletTexture,
 			bulletsComponent: this,
 			remainingDuration: 3,
 			tailPosition: position,
 			direction: direction,
-			Color.Yellow
+			color: Color.Yellow,
+			damage: 10
 		);
 
 		_bullets.Add(bullet);

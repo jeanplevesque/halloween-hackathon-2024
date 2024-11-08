@@ -10,6 +10,7 @@ namespace Zombies
 		private SpriteBatch _spriteBatch;
 		private BulletsComponent _bulletsComponent;
 		private Player _player;
+		private ZombiesComponent _zombiesComponent;
 
 		public Game1()
 		{
@@ -33,9 +34,11 @@ namespace Zombies
 			var playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
 			_bulletsComponent = new BulletsComponent(this);
 			_player = new Player(this, playerPosition, _bulletsComponent);
+			_zombiesComponent = new ZombiesComponent(this, _player, _bulletsComponent);
 
 			Components.Add(_bulletsComponent);
 			Components.Add(_player);
+			Components.Add(_zombiesComponent);
 		}
 
 		protected override void LoadContent()

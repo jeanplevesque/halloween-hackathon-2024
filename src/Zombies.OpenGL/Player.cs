@@ -14,6 +14,7 @@ public class Player : DrawableGameComponent
 	// In pixels per second
 	const float Speed = 80.0f;
 	const float TargetRadius = 60.0f;
+	public const float BoundingRadius = 30.0f;
 
 	private Vector2 _position;
 	private readonly BulletsComponent _bullets;
@@ -23,12 +24,16 @@ public class Player : DrawableGameComponent
 	private float _angle;
 	private float _textureScale;
 	private float _remainingShootingCooldown;
+	private float _remainingHealth = 100;
+	private bool _isAlive = true;
 
 	public Player(Game game, Vector2 position, BulletsComponent bullets) : base(game)
 	{
 		_position = position;
 		_bullets = bullets;
 	}
+
+	public Vector2 Position => _position;
 
 	protected override void LoadContent()
 	{
@@ -39,6 +44,11 @@ public class Player : DrawableGameComponent
 
 	public override void Update(GameTime gameTime)
 	{
+		if (!_isAlive)
+		{
+			return;
+		}
+
 		_remainingShootingCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 		HandleInput(gameTime);
 	}
@@ -94,5 +104,14 @@ public class Player : DrawableGameComponent
 			origin: Vector2.One * 0.5f * _texture.Width,
 			effects: SpriteEffects.None,
 			layerDepth: 0);
+	}
+
+	public void TakeDamage(float damage)
+	{
+		_remainingHealth -= damage;
+		if (_remainingHealth <= 0)
+		{
+			_isAlive = false;
+		}
 	}
 }
